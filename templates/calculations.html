@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SMA Crossover Calculator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+  <link rel="shortcut icon" href="{{url_for('static', filename='favicon.png')}}" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
+</head>
+<body>
+  <nav class="navbar bg-primary navbar-dark">
+    <div class="container"> <a class="navbar-brand" href="#">
+        <i class="fa d-inline fa-lg fa-line-chart"></i>
+        <b> SMA Crossover Calculator</b>
+      </a> </div>
+  </nav>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>{{symbol}}</h1>
+        </div>
+      </div>
+      <canvas id="context"></canvas>
+      <script>
+        let context = document.getElementById('context').getContext('2d');
+        let graph_data = '{{graph_data}}';
+        graph_data = graph_data.replaceAll('&#34;', '\"');
+        graph_data = graph_data.replaceAll('NaN', null);
+        graph_data = JSON.parse(graph_data);
+        let options = {
+          scales: {
+            xAxes: [{
+              scaleLabel: {
+                display: true,
+                labelString: '{{xlabel}}'
+              }
+            }],
+            yAxes: [{
+              scaleLabel: {
+                display: true,
+                labelString: 'Prices'
+              },
+              ticks: {
+                callback: function(value, index, values) {
+                  return '$' + value;
+                }
+              }
+            }]
+          }
+        };
+        new Chart(context, {
+          type: 'line',
+          data: graph_data,
+          options: options
+        });
+      </script>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table table-striped table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col">Calculations (All calculatations are based upon the graph)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="">Market Sentiment</td>
+                  <td class="{{market_sentiment_color}}">{{market_sentiment}}</td>
+                  <td>Current Price</td>
+                  <td class="text-muted">{{current_price}}</td>
+                </tr>
+                <tr>
+                  <td>Price At Last Cross</td>
+                  <td class="text-muted">${{cross_price}}</td>
+                  <td>Average Volume</td>
+                  <td class="text-muted">{{avg_volume}}</td>
+                </tr>
+                <tr>
+                  <td>Last Cross</td>
+                  <td class="text-muted">{{cross_point}}</td>
+                  <td>Price Change Since Last Cross</td>
+                  <td class="{{price_change_color}}">{{price_change}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <a href="{{url_for('index')}}">Go Back</a>
+    </div>
+  </div>
+  <div class="py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center d-md-flex align-items-center">
+          <ul class="nav d-flex justify-content-center">
+            <li class="nav-item"> <a class="nav-link active" href="https://github.com/lil-zohee">GitHub</a> </li>
+            <li class="nav-item"> <a class="nav-link" href="https://www.youtube.com/channel/UCu0OysBHekgiFRJT113pmDA">Youtube</a> </li>
+            <li class="nav-item"> <a class="nav-link" href="https://discord.gg/Nu5kQ4uUwJ">Discord</a> </li>
+          </ul> <i class="d-block fa fa-line-chart fa-3x mx-auto text-primary"></i>
+          <p class="mb-0 py-1">©2021 Sohan-Dillikar All rights reserved</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
