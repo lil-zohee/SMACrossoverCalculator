@@ -1,0 +1,10 @@
+# pip3 install -r requirements.txt
+
+# For more information, check out the GitHub
+# Repository here! --> https://github.com/lil-zohee/SMACrossoverCalculator
+
+flask==1.1.2
+numpy==1.19.4
+pandas==1.1.4
+beautifulsoup4==4.9.3
+alpaca-trade-api==0.51.0
