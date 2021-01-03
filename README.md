@@ -1,1 +1,1 @@
-# SMACrossoverCalculator
+# SMA Crossover Calculator
