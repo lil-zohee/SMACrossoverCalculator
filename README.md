@@ -1,4 +1,5 @@
 # SMA Crossover Calculator
+Try out the web application here --> http://smacrosscalc.pythonanywhere.com/
 ## Prerequisites
 1. Have `Python3` and `pip` installed on PC.  (Install from https://python.org)
 2. Have `git` installed.  (Install from https://git-scm.com/downloads)
