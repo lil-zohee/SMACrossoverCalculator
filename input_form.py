@@ -14,7 +14,7 @@ class InputForm:
 
     def is_valid(self):
         if self.interval in ['1Min', '5Min', '15Min', '1D']:
-            if 1 <= self.limit <= 1000:
+            if 20 <= self.limit <= 1000:
                 df = config.api.get_barset(self.symbol, self.interval, self.limit)[self.symbol].df
                 if not df.empty:
                     self.series = df['close']
